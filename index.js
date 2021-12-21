@@ -47,7 +47,7 @@ const mysql=require('./mysql');
 const io = new Server(server, {
     //支持跨域请求
     cors: {
-            origin: "ws://localhost:3000",
+            origin: "http://localhost:3000",
             methods: ["GET", "POST"],
     }
 });

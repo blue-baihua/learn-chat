@@ -6,8 +6,15 @@ const connection = mysql.createConnection({
     database : 'node'
 });
 connection.connect();
+//监测断开 重新链接
+connection.on('error', function (err) {
+    if (err.code === 'PROTOCOL_CONNECTION_LOST') {
+        connection.connect();
+    } else {
+        throw err;
+    }
+});
 //查询
-//var  sql = 'SELECT * FROM websites';
 exports.select= function(sql){
     return new Promise((resolve,reject)=>{
           connection.query(sql,function (err,result) {
